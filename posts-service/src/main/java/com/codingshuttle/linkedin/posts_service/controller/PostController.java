@@ -2,7 +2,6 @@ package com.codingshuttle.linkedin.posts_service.controller;
 
 import com.codingshuttle.linkedin.posts_service.dto.PostCreateRequestDto;
 import com.codingshuttle.linkedin.posts_service.dto.PostDto;
-import com.codingshuttle.linkedin.posts_service.entity.Post;
 import com.codingshuttle.linkedin.posts_service.service.PostsService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
