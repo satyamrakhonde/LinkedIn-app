@@ -1,7 +1,9 @@
 package com.codingshuttle.linkedin.user_service.util;
 
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PasswordUtil {
 
     //Hash a password fot the first time

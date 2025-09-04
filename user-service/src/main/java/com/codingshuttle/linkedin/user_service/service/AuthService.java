@@ -1,12 +1,16 @@
 package com.codingshuttle.linkedin.user_service.service;
 
+import com.codingshuttle.linkedin.user_service.dto.LoginRequestDto;
 import com.codingshuttle.linkedin.user_service.dto.SignupRequestDto;
 import com.codingshuttle.linkedin.user_service.dto.UserDto;
 import com.codingshuttle.linkedin.user_service.entity.User;
+import com.codingshuttle.linkedin.user_service.exception.ResourceNotFoundException;
 import com.codingshuttle.linkedin.user_service.repository.UserRepository;
+import com.codingshuttle.linkedin.user_service.util.JwtService;
 import com.codingshuttle.linkedin.user_service.util.PasswordUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.coyote.BadRequestException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +19,9 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class AuthService {
 
-    private UserRepository userRepository;
-    private ModelMapper modelMapper;
+    private final UserRepository userRepository;
+    private final ModelMapper modelMapper;
+    private final JwtService jwtService;
 
     public UserDto signup(SignupRequestDto signupRequestDto) {
         User user = modelMapper.map(signupRequestDto, User.class);
@@ -24,5 +29,18 @@ public class AuthService {
 
         User savedUser = userRepository.save(user);
         return modelMapper.map(savedUser, UserDto.class);
+    }
+
+    public String login(LoginRequestDto loginRequestDto) throws BadRequestException {
+        User user = userRepository.findByEmail(loginRequestDto.getEmail())
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with email:" + loginRequestDto.getEmail()));
+
+        boolean isPasswordMatch = PasswordUtil.checkPassword(loginRequestDto.getPassword(), user.getPassword());
+
+        if(!isPasswordMatch) {
+            throw new BadRequestException("Incorrect password");
+        }
+
+        return jwtService.generateAccessToken(user);
     }
 }
