@@ -19,7 +19,7 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/signup")
-    public ResponseEntity<UserDto> signup(@RequestBody SignupRequestDto signupRequestDto) {
+    public ResponseEntity<UserDto> signup(@RequestBody SignupRequestDto signupRequestDto) throws BadRequestException {
         UserDto userDto = authService.signup(signupRequestDto);
         return new ResponseEntity<>(userDto, HttpStatus.CREATED);
     }
