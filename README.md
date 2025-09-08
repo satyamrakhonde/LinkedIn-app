@@ -14,3 +14,12 @@ Register the RequestInterceptor with WebMVC
 
 Setup OpenFeignInterceptor to pass on user data
 
+Agenda Week 5-
+Create Notification Service
+Setting up Kafka Message Queue
+Setup the consumer and producer for messaging 
+
+Setup producer in Posts Service
+Create request mapping for send, accept and reject the connection request
+Setup producer in Connections Service
+
