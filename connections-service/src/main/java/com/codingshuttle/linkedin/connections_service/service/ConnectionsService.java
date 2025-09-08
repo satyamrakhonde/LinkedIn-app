@@ -1,5 +1,6 @@
 package com.codingshuttle.linkedin.connections_service.service;
 
+import com.codingshuttle.linkedin.connections_service.auth.UserContextHolder;
 import com.codingshuttle.linkedin.connections_service.entity.Person;
 import com.codingshuttle.linkedin.connections_service.repository.PersonRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +16,8 @@ public class ConnectionsService {
 
     private final PersonRepository personRepository;
 
-    public List<Person> getFirstDegreeConnections(Long userId) {
+    public List<Person> getFirstDegreeConnections() {
+        Long userId = UserContextHolder.getCurrentUserId();
         log.info("Getting first degree connections for uer with id: {}", userId);
 
         return personRepository.getFirstDegreeConnections(userId);
