@@ -43,7 +43,7 @@ public class PostsService {
                 .build();
 
         kafkaTemplate.send("post-created-topic", postCreatedEvent);
-        
+
         return modelMapper.map(savedPost, PostDto.class);
     }
 
