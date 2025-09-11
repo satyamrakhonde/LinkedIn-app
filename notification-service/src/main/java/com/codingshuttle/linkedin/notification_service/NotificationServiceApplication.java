@@ -1,4 +1,4 @@
-package com.codingshuttle.linkedInApp.notification_service;
+package com.codingshuttle.linkedin.notification_service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

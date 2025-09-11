@@ -1,4 +1,4 @@
-package com.codingshuttle.linkedInApp.notification_service.notification_service.dto;
+package com.codingshuttle.linkedin.notification_service.notification_service.dto;
 
 import lombok.Data;
 
